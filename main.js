@@ -1,7 +1,7 @@
 const fs = require("fs");
 const axios = require("axios");
 
-const URL = "http://jsonplaceholder.typicode.com/posts/1";
+const URL = "http://jsonplaceholder.typicode.com/posts/";
 
 (async function main() {
   const data = await fetchData(URL);
@@ -25,7 +25,7 @@ async function fetchData(url) {
 async function writeToFile(result) {
   const dataString = JSON.stringify(result.data);
 
-  fs.writeFile("./results/posts.txt", dataString, (err) => {
+  fs.writeFile("./results/posts.json", dataString, (err) => {
     if (err) throw err;
   });
   return "Data was written to file successfully.";
