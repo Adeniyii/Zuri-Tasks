@@ -3,6 +3,7 @@ const axios = require("axios");
 
 const URL = "http://jsonplaceholder.typicode.com/posts/";
 
+// Start program
 (async function main() {
   const data = await fetchData(URL);
   const written = await writeToFile(data);
@@ -13,7 +14,8 @@ const URL = "http://jsonplaceholder.typicode.com/posts/";
 async function fetchData(url) {
   try {
     const rawData = await axios(url);
-    if (typeof rawData === "undefined") {
+    if (!rawData) {
+      // If nothing was returned from resource
       throw new Error("Unable to fetch resource.");
     }
     return rawData;
@@ -23,6 +25,7 @@ async function fetchData(url) {
 }
 
 async function writeToFile(result) {
+  // fs.writeFile() requires strings
   const dataString = JSON.stringify(result.data);
 
   fs.writeFile("./results/posts.json", dataString, (err) => {
@@ -30,3 +33,5 @@ async function writeToFile(result) {
   });
   return "Data was written to file successfully.";
 }
+
+// Victory!
